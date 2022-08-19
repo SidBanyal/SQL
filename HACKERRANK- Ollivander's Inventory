@@ -1,0 +1,19 @@
+WITH min_coins as (
+SELECT
+    ROW_NUMBER() OVER(PARTITION BY code,power ORDER BY coins_needed asc) as RowNumber,
+    id,
+    code,
+    coins_needed,
+    power
+FROM Wands
+)
+
+SELECT
+        id,
+        age,
+        coins_needed,
+        power
+FROM    Wands_Property wp
+JOIN    min_coins mc ON mc.code = wp.code AND RowNumber = 1
+WHERE   is_evil = 0
+ORDER BY power desc, age desc

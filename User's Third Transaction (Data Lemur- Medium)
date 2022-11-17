@@ -1,0 +1,9 @@
+with cte as (
+    select *,
+        row_number() over(partition by user_id order by transaction_date) as row_number
+    from transactions
+)
+
+SELECT user_id,spend,transaction_date 
+FROM cte
+WHERE row_number=3

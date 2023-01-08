@@ -1,0 +1,9 @@
+WITH VIR_TAB AS(
+Select id, email,
+ROW_NUMBER() OVER(PARTITION BY email) AS ROW_NUM
+from Person
+)
+
+SELECT  email
+FROM VIR_TAB
+where ROW_NUM=2;

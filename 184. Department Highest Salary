@@ -1,0 +1,11 @@
+with vir_tab as (
+SELECT a.name,salary,b.name as Department,
+RANK() OVER(PARTITION BY b.name ORDER BY salary DESC) AS sal_rank
+FROM Employee a
+LEFT JOIN Department b
+ON a.departmentId =b.id
+)
+
+SELECT Department, name as Employee, salary AS Salary
+FROM vir_tab
+WHERE sal_rank=1

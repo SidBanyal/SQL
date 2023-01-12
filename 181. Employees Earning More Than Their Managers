@@ -1,0 +1,10 @@
+with vir_tab as(
+SELECT a.id, a.name,a.salary, a.managerId, b.salary as manager_sal
+FROM Employee a
+LEFT JOIN Employee b
+ON a.managerId=b.id
+)
+
+SELECT name as Employee
+FROM vir_tab
+WHERE salary> manager_sal

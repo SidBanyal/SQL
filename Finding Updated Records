@@ -1,0 +1,2 @@
+select x.id , x.first_name , x.last_name , x.department_id , x.salary from 
+(select *, rank() over (partition by id order by salary desc ) as ra from ms_employee_salary)x  where x.ra=1 order by id;

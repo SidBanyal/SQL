@@ -1,0 +1,5 @@
+SELECT a.first_name, b.order_date, b.order_details, b.total_order_cost
+FROM customers a
+LEFT JOIN orders b
+ON a.id=b.cust_id
+HAVING a.first_name IN ('Jill','Eva');

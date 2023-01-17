@@ -1,0 +1,10 @@
+WITH tmp AS (
+select user_id_sender, user_id_receiver, MIN(date) AS date,
+SUM(case when action = 'accepted' THEN 1 ELSE 0 END) AS accepted_cnt,
+SUM(case when action = 'sent' THEN 1 ELSE 0 END) AS sent_cnt
+from fb_friend_requests
+GROUP BY 1,2
+)
+SELECT date, SUM(accepted_cnt)/SUM(sent_cnt) AS acceptance_rate
+FROM tmp
+GROUP BY date;

@@ -1,0 +1,5 @@
+SELECT DISTINCT(host_id), guest_id
+FROM airbnb_hosts a
+LEFT JOIN airbnb_guests b
+on a.nationality=b.nationality
+AND a.gender=b.gender

@@ -1,0 +1,11 @@
+with cte as (
+select distinct(host_id), nationality, age
+from airbnb_hosts  
+)
+
+select h.nationality, count(u.unit_id) total_units
+from cte h
+inner join airbnb_units u 
+on h.host_id = u.host_id
+where h.age < 30 and u.unit_type = 'Apartment'
+group by h.nationality

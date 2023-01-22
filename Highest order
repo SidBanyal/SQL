@@ -1,0 +1,7 @@
+select customers.id,order_date,first_name,sum(total_order_cost) as tl_cost from 
+customers right join orders
+on customers.id = orders.cust_id
+where order_date between '2019-02-01' and '2019-05-01'
+group by customers.id , order_date
+order by tl_cost desc
+limit 1;

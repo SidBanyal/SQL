@@ -1,0 +1,10 @@
+with vir_tab as(
+SELECT EXTRACT(year FROM inspection_date) as year,violation_id
+FROM sf_restaurant_health_violations
+WHERE violation_id IS NOT NULL AND 
+business_name='Roxanne Cafe'
+)
+
+Select year,COUNT(violation_id) as n_inspections
+FROM vir_tab
+GROUP BY year

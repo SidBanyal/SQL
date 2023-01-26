@@ -1,0 +1,10 @@
+With a as (select date, sum(consumption) as Tot_consumption from
+    (select date,consumption from fb_eu_energy
+    Union ALL
+    select date,consumption from fb_asia_energy
+    Union All
+    select date,consumption from fb_na_energy) as data
+    group by date )
+    
+    Select * from a where Tot_consumption=(select max(Tot_consumption) from a)
+    ;

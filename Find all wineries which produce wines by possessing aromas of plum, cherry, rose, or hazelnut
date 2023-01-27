@@ -1,0 +1,3 @@
+select distinct winery
+FROM winemag_p1
+where lower(description) REGEXP '(plum|rose|cherry|hazelnut)([^a-z])'

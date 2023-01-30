@@ -1,0 +1,10 @@
+with virtab as (
+SELECT first_name,manager_id, target,
+RANK() OVER(PARTITION BY manager_id ORDER BY target DESC) as rk
+FROM salesforce_employees
+)
+
+
+select first_name,target
+FROM virtab
+WHERE rk=1 and manager_id=13

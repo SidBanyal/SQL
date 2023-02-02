@@ -1,0 +1,10 @@
+With vir_tab as(
+Select first_name, department, salary, 
+RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rnk
+FROM  employee
+)
+
+SELECT department, first_name as employee_name, salary
+FROM vir_tab
+WHERE rnk=1
+ORDER BY salary DESC;

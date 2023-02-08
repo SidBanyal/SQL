@@ -1,0 +1,13 @@
+with vir_tab1 as(
+SELECT e.email_id, signup_action
+FROM emails e
+LEFT JOIN texts t
+ON e.email_id=t.email_id
+AND t.signup_action='Confirmed'),
+vir_tab2 AS(
+SELECT SUM(CASE WHEN signup_action='Confirmed' THEN 1 ELSE 0 END) as cur , COUNT(*) as total
+FROM vir_tab1
+)
+
+select ROUND(cur/(total*1.0),2) as confirm_rate
+from vir_tab2

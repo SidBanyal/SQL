@@ -1,0 +1,17 @@
+with vir_tab as(
+SELECT  a.customer_id, b.product_category
+FROM customer_contracts a
+LEFT JOIN products b 
+ON a.product_id=b.product_id
+ORDER BY customer_id
+),
+vir_tab2 as(
+SELECT customer_id,COUNT(DISTINCT product_category) as category_count
+FROM vir_tab
+GROUP BY customer_id
+)
+
+SELECT customer_id FROM
+vir_tab2
+WHERE category_count= (SELECT COUNT(DISTINCT product_category) FROM products)
+order by customer_id

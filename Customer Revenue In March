@@ -1,0 +1,5 @@
+SELECT cust_id, SUM(total_order_cost) as revenue
+from orders
+WHERE EXTRACT(MONTH FROM order_date)=3
+GROUP BY(cust_id)
+ORDER BY 2 DESC

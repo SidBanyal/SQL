@@ -1,0 +1,11 @@
+with cte as(
+SELECT b.worker_title,a.salary, RANK() OVER(ORDER BY a.salary desc ) AS rnk
+FROM worker a
+LEFT JOIN title b
+ON a.worker_id=b.worker_ref_id
+ORDER BY 2 DESC
+)
+
+SELECT worker_title
+FROM cte
+WHERE rnk=1

@@ -1,0 +1,9 @@
+WITH vir_tab as(
+SELECT id, name
+ROW_NUMBER() OVER (Partition by email) as email_counter
+FROM person
+)
+
+SELECT email
+FROM vir_tab
+WHERE email_counter=2

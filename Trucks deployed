@@ -1,0 +1,15 @@
+-- How many trucks are deployed per site? 
+
+WITH vir_tab as (
+SELECT site_id, vehicle_id
+FROM deployment_facts
+WHERE vehicle_id IN (SELECT vehicle_id FROM moves WHERE move_complete IN ('True'))
+)
+
+SELECT a.site_id, b.site_name, COUNT(a.vehicle_id)
+FROM Vir_tab a
+LEFT JOIN site_facts b
+ON a.site_id=b.site_id
+GROUP BY 1,2
+ORDER BY 3 DESC
+

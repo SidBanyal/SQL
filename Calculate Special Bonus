@@ -1,0 +1,9 @@
+with vir_tab AS (
+select employee_id, name ,salary,
+CASE WHEN employee_id%2 !=0 AND name NOT LIKE 'M%' THEN 1 ELSE 0 END AS CON_2
+FROM Employees
+)
+
+select employee_id, salary*CON_2 as bonus
+FROM vir_tab
+order by 1

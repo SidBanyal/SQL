@@ -1,0 +1,4 @@
+SELECT ROUND(100*(SELECT COUNT(case_id) FROM
+callers
+WHERE call_category is NULL
+OR call_category ='n/a')/COUNT(case_id),1) uncategorised_call_pct FROM callers

@@ -1,0 +1,11 @@
+with vir_tab as(
+
+SELECT user_id, Count(*) as tweet_bucket
+FROM tweets
+WHERE tweet_date >='2022-01-01' and tweet_date<='2022-12-31'
+GROUP BY user_id
+)
+
+SELECT tweet_bucket, COUNT(*)
+FROM vir_tab
+GROUP BY 1

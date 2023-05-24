@@ -1,0 +1,10 @@
+with vir_tab as(
+SELECT user_id, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY 
+transaction_date) as transaction_no, spend
+,transaction_date
+from transactions
+)
+
+SELECT user_id,spend,transaction_date
+from vir_tab
+WHERE transaction_no =3

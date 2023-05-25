@@ -1,0 +1,11 @@
+with vir_tab as(
+SELECT category, product, sum(spend) as total_spend,
+RANK() OVER (PARTITION BY category ORDER BY sum(spend)) as product_rnk
+FROM product_spend
+WHERE EXTRACT (YEAR FROM transaction_date) in ('2022')
+GROUP BY category,product
+)
+
+select category,product,total_spend
+FROM vir_tab
+WHERE product_rnk in (1,2)

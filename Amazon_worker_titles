@@ -1,0 +1,11 @@
+with vir_tab as(
+SELECT a.worker_title,b.salary,
+RANK() OVER (ORDER BY b.salary DESC) as rnk
+FROM worker b
+LEFT JOIN title a
+ON b.worker_id = a.worker_ref_id
+)
+
+SELECT worker_title, salary
+FROM vir_tab
+WHERE worker_title IS NOT NULL and rnk=1

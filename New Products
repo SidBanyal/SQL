@@ -1,0 +1,10 @@
+with vir_tab as(
+SELECT company_name, SUM(case when YEAR='2019' THEN 1 END) a ,
+SUM(case when YEAR='2020' THEN 1 END) b 
+FROM car_launches
+GROUP BY company_name
+)
+
+SELECT company_name, b-a as net_products
+FROM vir_tab
+ORDER BY 1 ASC
